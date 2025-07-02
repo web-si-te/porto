@@ -3,22 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faiz</title>
+    <!-- [BARU] Meta description untuk SEO -->
+    <meta name="description" content="Portofolio Faiz, seorang web developer yang bersemangat dalam menciptakan solusi web modern dan responsif. Lihat proyek dan keahlian saya.">
+    <title>Faiz | Web Developer</title>
     <style>
+        /* [BARU] CSS Variables untuk tema warna yang mudah diubah */
+        :root {
+            --primary-color: #2c3e50; /* Biru Tua Gelap */
+            --secondary-color: #34495e; /* Versi lebih terang dari primary */
+            --accent-color: #3498db; /* Biru Terang */
+            --accent-color-hover: #2980b9; /* Aksen saat hover */
+            --text-light: #ecf0f1; /* Teks Terang */
+            --text-dark: #333; /* Teks Gelap */
+            --text-muted: #555; /* Teks Redup */
+            --bg-light: #f4f7f6; /* Latar Belakang Terang */
+            --bg-dark: #1f2b38; /* Latar Belakang Footer */
+            --border-color: #e0e0e0;
+        }
+
         /* Reset CSS Sederhana */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            scroll-behavior: smooth; /* Untuk smooth scroll saat klik navigasi */
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Poppins', sans-serif; /* Font modern dan bersih */
+            font-family: 'Poppins', sans-serif;
             line-height: 1.7;
-            background-color: #f4f7f6; /* Warna latar belakang netral */
-            color: #333;
-            overflow-x: hidden; /* Mencegah scroll horizontal */
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* [BARU] Kelas untuk animasi fade-in saat scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Container Utama */
@@ -30,8 +57,8 @@
 
         /* Header & Navigasi */
         header {
-            background-color: #2c3e50; /* Warna utama gelap */
-            color: #ecf0f1; /* Warna teks terang */
+            background-color: var(--primary-color);
+            color: var(--text-light);
             padding: 1rem 0;
             position: sticky;
             top: 0;
@@ -39,72 +66,67 @@
             width: 100%;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-
         header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
         header .logo {
             font-size: 1.8em;
             font-weight: 700;
             text-decoration: none;
-            color: #ecf0f1;
+            color: var(--text-light);
         }
-
         header nav ul {
             list-style: none;
             display: flex;
         }
-
         header nav ul li {
             margin-left: 25px;
         }
-
         header nav ul li a {
             text-decoration: none;
-            color: #bdc3c7; /* Warna link nav agak redup */
+            color: #bdc3c7;
             font-weight: 500;
             transition: color 0.3s ease;
         }
-
         header nav ul li a:hover,
-        header nav ul li a.active { /* Class 'active' bisa ditambahkan dengan JS saat scroll */
-            color: #3498db; /* Warna aksen */
+        header nav ul li a.active {
+            color: var(--accent-color);
         }
 
         /* Hero Section */
         #hero {
-            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.85)), url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); /* Ganti dengan URL gambar Anda atau biarkan warna solid */
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.85)), url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
             color: #fff;
             padding: 100px 0;
             text-align: center;
-            min-height: 80vh; /* Tinggi minimal agar mengisi layar */
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
-
         #hero h1 {
             font-size: 3em;
             margin-bottom: 20px;
             font-weight: 700;
             line-height: 1.2;
         }
-
+        /* [BARU] Style untuk efek mengetik */
+        #hero h1 .typed-text {
+            color: var(--accent-color);
+        }
         #hero p {
             font-size: 1.2em;
             margin-bottom: 30px;
             max-width: 600px;
         }
-
         .cta-button {
             display: inline-block;
-            background-color: #3498db; /* Warna aksen */
+            background-color: var(--accent-color);
             color: #fff;
             padding: 12px 25px;
             text-decoration: none;
@@ -112,30 +134,27 @@
             font-weight: 600;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
-
         .cta-button:hover {
-            background-color: #2980b9; /* Warna aksen lebih gelap saat hover */
+            background-color: var(--accent-color-hover);
             transform: translateY(-2px);
         }
 
         /* Sections (About, Projects, Contact) */
         section {
             padding: 80px 0;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid var(--border-color);
         }
         section:last-of-type {
             border-bottom: none;
         }
-
         section h2 {
             text-align: center;
             font-size: 2.5em;
             margin-bottom: 50px;
-            color: #2c3e50; /* Warna utama gelap */
+            color: var(--primary-color);
             position: relative;
             padding-bottom: 10px;
         }
-        /* Garis bawah judul section */
         section h2::after {
             content: '';
             position: absolute;
@@ -144,16 +163,15 @@
             transform: translateX(-50%);
             width: 80px;
             height: 3px;
-            background-color: #3498db; /* Warna aksen */
+            background-color: var(--accent-color);
             border-radius: 2px;
         }
-
 
         /* About Section */
         #about .about-content {
             display: flex;
             gap: 40px;
-            align-items: flex-start; /* Agar text dan gambar align di atas */
+            align-items: flex-start;
         }
         #about .about-text {
             flex: 2;
@@ -163,7 +181,7 @@
             text-align: center;
         }
         #about .profile-pic {
-            width: 200px; /* Sesuaikan ukuran */
+            width: 200px;
             height: 200px;
             border-radius: 50%;
             object-fit: cover;
@@ -179,7 +197,7 @@
         }
         #about .skills-list li {
             background-color: #e0e0e0;
-            color: #555;
+            color: var(--text-muted);
             padding: 5px 12px;
             border-radius: 20px;
             font-size: 0.9em;
@@ -188,10 +206,9 @@
         /* Projects Section */
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsif grid */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
-
         .project-card {
             background-color: #fff;
             border-radius: 8px;
@@ -201,48 +218,54 @@
             display: flex;
             flex-direction: column;
         }
-
         .project-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
-
-        .project-card img.project-image { /* Tambahkan class .project-image jika ada gambar */
+        /* [BARU] Wrapper untuk gambar agar efek zoom bekerja dengan baik */
+        .project-image-wrapper {
             width: 100%;
-            height: 200px; /* Tinggi gambar tetap */
-            object-fit: cover;
+            height: 200px;
+            overflow: hidden;
         }
-
+        .project-card img.project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease; /* [BARU] Transisi untuk zoom */
+        }
+        .project-card:hover img.project-image {
+            transform: scale(1.05); /* [BARU] Efek zoom saat hover */
+        }
         .project-card .project-info {
             padding: 20px;
-            flex-grow: 1; /* Agar konten mengisi sisa ruang */
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
-
         .project-card h3 {
             font-size: 1.4em;
             margin-bottom: 10px;
-            color: #2c3e50;
+            color: var(--primary-color);
         }
-
         .project-card .project-description {
             font-size: 0.95em;
-            color: #555;
+            color: var(--text-muted);
             margin-bottom: 15px;
-            flex-grow: 1; /* Mendorong link ke bawah jika deskripsi pendek */
+            flex-grow: 1;
         }
-
         .project-card .project-links a {
-            display: inline-block;
-            margin-right: 10px;
+            display: inline-flex; /* [BARU] Ubah ke inline-flex untuk align ikon */
+            align-items: center;
+            gap: 6px; /* [BARU] Jarak antara ikon dan teks */
+            margin-right: 15px;
             text-decoration: none;
-            color: #3498db;
+            color: var(--accent-color);
             font-weight: 500;
             transition: color 0.2s;
         }
         .project-card .project-links a:hover {
-            color: #2980b9;
+            color: var(--accent-color-hover);
         }
         .project-card .project-tech {
             margin-top: 15px;
@@ -258,7 +281,6 @@
             margin-bottom: 5px;
         }
 
-
         /* Contact Section */
         #contact form {
             max-width: 600px;
@@ -266,18 +288,15 @@
             display: grid;
             gap: 20px;
         }
-
         #contact .form-group {
             display: flex;
             flex-direction: column;
         }
-
         #contact label {
             margin-bottom: 5px;
             font-weight: 500;
-            color: #555;
+            color: var(--text-muted);
         }
-
         #contact input,
         #contact textarea {
             padding: 12px;
@@ -290,16 +309,14 @@
         #contact input:focus,
         #contact textarea:focus {
             outline: none;
-            border-color: #3498db; /* Warna aksen saat fokus */
+            border-color: var(--accent-color);
         }
-
         #contact textarea {
             resize: vertical;
             min-height: 120px;
         }
-
         #contact button[type="submit"] {
-            background-color: #3498db;
+            background-color: var(--accent-color);
             color: white;
             padding: 12px 20px;
             border: none;
@@ -308,12 +325,30 @@
             font-size: 1.1em;
             font-weight: 600;
             transition: background-color 0.3s ease, transform 0.2s ease;
-            justify-self: start; /* Tombol tidak full width */
+            justify-self: start;
         }
-
         #contact button[type="submit"]:hover {
-            background-color: #2980b9;
+            background-color: var(--accent-color-hover);
             transform: translateY(-2px);
+        }
+        /* [BARU] Styling untuk pesan status form */
+        #form-status {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 500;
+            display: none; /* Sembunyikan default */
+        }
+        #form-status.success {
+            background-color: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        #form-status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            display: block;
         }
 
         .social-links {
@@ -324,53 +359,50 @@
             display: inline-block;
             margin: 0 15px;
             text-decoration: none;
-            color: #555; /* Warna ikon sosial */
-            font-size: 1.8em; /* Ukuran ikon */
+            color: var(--text-muted);
+            font-size: 1.8em;
             transition: color 0.3s ease, transform 0.2s ease;
         }
         .social-links a:hover {
-            color: #3498db; /* Warna aksen saat hover */
+            color: var(--accent-color);
             transform: translateY(-3px);
         }
-        /* Anda bisa menggunakan SVG ikon atau Font Awesome jika mau, tapi ini contoh sederhana */
-
 
         /* Footer */
         footer {
             text-align: center;
             padding: 30px 0;
-            background-color: #1f2b38; /* Warna footer lebih gelap dari header */
+            background-color: var(--bg-dark);
             color: #bdc3c7;
         }
 
-        /* Tombol Scroll to Top (Opsional, perlu JS) */
+        /* Tombol Scroll to Top */
         #scrollTopBtn {
-            display: none; /* Sembunyikan default */
+            display: none;
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 999;
-            background-color: #3498db;
+            background-color: var(--accent-color);
             color: white;
             border: none;
             border-radius: 50%;
             cursor: pointer;
-            padding: 0; /* Hapus padding agar ukuran ditentukan oleh width/height */
+            padding: 0;
             width: 45px;
             height: 45px;
-            font-size: 20px; /* Ukuran panah */
+            font-size: 20px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: background-color 0.3s, opacity 0.3s, transform 0.3s;
+            transition: all 0.3s ease;
             opacity: 0.8;
-            line-height: 45px; /* Pusatkan panah secara vertikal */
+            line-height: 45px;
             text-align: center;
         }
         #scrollTopBtn:hover {
-            background-color: #2980b9;
+            background-color: var(--accent-color-hover);
             opacity: 1;
             transform: translateY(-3px);
         }
-
 
         /* Responsiveness */
         @media (max-width: 768px) {
@@ -382,35 +414,31 @@
                 margin-bottom: 10px;
             }
             header nav ul {
-                padding-left: 0; /* Reset padding jika ada */
-                justify-content: center; /* Pusatkan nav item */
-                flex-wrap: wrap; /* Izinkan wrap jika terlalu banyak item */
+                padding-left: 0;
+                justify-content: center;
+                flex-wrap: wrap;
             }
             header nav ul li {
-                margin: 5px 10px; /* Spasi antar nav item di mobile */
+                margin: 5px 10px;
             }
-
             #hero h1 {
                 font-size: 2.2em;
             }
             #hero p {
                 font-size: 1em;
             }
-
             section h2 {
                 font-size: 2em;
             }
-
             #about .about-content {
                 flex-direction: column;
-                align-items: center; /* Pusatkan konten di mobile */
+                align-items: center;
             }
             #about .profile-pic-container {
-                margin-bottom: 30px; /* Beri jarak jika gambar di atas teks */
+                margin-bottom: 30px;
             }
-
             .project-grid {
-                grid-template-columns: 1fr; /* Satu kolom di mobile */
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -418,54 +446,32 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Jika ingin menggunakan ikon (contoh: Font Awesome via CDN)
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    -->
+    <!-- [BARU] CDN untuk Typed.js (Efek Mengetik) -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
 </head>
 <body>
-
-    <header>
-        <div class="container">
-            <a href="#" class="logo">Faiz</a>
-            <nav>
-                <ul>
-                    <li><a href="#hero" class="active">Beranda</a></li>
-                    <li><a href="#about">Tentang Saya</a></li>
-                    <li><a href="#projects">Proyek</a></li>
-                    <li><a href="#contact">Kontak</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
     <section id="hero">
         <div class="container">
-            <h1>Halo, Saya Faiz</h1>
-            <p>Seorang Mahasiswa yang bersemangat mencari hal-hal baru dan  menciptakan solusi web yang modern dan responsif. Saya suka mengubah ide menjadi kenyataan digital.</p>
-            <a href="#projects" class="cta-button">Lihat Proyek Saya</a>
+            <!-- [DIUBAH] Tambahkan span untuk target efek mengetik -->
+            <h1>Halo, Saya Faiz <br> Seorang <span class="typed-text"></span></h1>
+            <p class="fade-in">Seorang Mahasiswa yang bersemangat mencari hal-hal baru dan menciptakan solusi web yang modern dan responsif. Saya suka mengubah ide menjadi kenyataan digital.</p>
+            <a href="#projects" class="cta-button fade-in">Lihat Proyek Saya</a>
         </div>
     </section>
 
     <section id="about">
         <div class="container">
-            <h2>Tentang Saya</h2>
+            <h2 class="fade-in">Tentang Saya</h2>
             <div class="about-content">
-                <div class="profile-pic-container">
-                    <!-- Ganti dengan URL gambar profil Anda -->
-                    <img src="gambar/photo_2025-06-20_11-23-29.jpg" alt="Foto Profil Nama Anda" class="profile-pic">
+                <div class="profile-pic-container fade-in">
+                    <!-- Ganti dengan URL gambar profil Anda. Ini placeholder. -->
+                    <img src="https://via.placeholder.com/200" alt="Foto Profil Faiz" class="profile-pic">
                 </div>
-                <div class="about-text">
-                    <p>Saya Faiz, seorang Frontend Developer pemula yang bersemangat untuk membangun karir di bidang teknologi. Saya memiliki keahlian dasar dalam HTML, CSS, dan JavaScript, dengan fokus pada pembuatan website yang responsif dan user-friendly.
-Saya adalah individu yang proaktif, detail-oriented, dan selalu ingin belajar hal baru. Di waktu luang, saya menikmati bermain badminton dan membaca buku. Saya mencari peran entry-level di mana saya bisa mengembangkan kemampuan saya lebih lanjut dan memberikan kontribusi positif.</p>
+                <div class="about-text fade-in">
+                    <p>Saya Faiz, seorang Frontend Developer pemula yang bersemangat untuk membangun karir di bidang teknologi. Saya memiliki keahlian dasar dalam HTML, CSS, dan JavaScript, dengan fokus pada pembuatan website yang responsif dan user-friendly. Saya adalah individu yang proaktif, detail-oriented, dan selalu ingin belajar hal baru. Di waktu luang, saya menikmati bermain badminton dan membaca buku. Saya mencari peran entry-level di mana saya bisa mengembangkan kemampuan saya lebih lanjut dan memberikan kontribusi positif.</p>
                     <h3>Keahlian Utama:</h3>
                     <ul class="skills-list">
-                        <li>HTML</li>
-                        <li>CSS</li>
-                        <li>JavaScript</li>
-                        <li>PHP</li>
-                        <li>GitHub</li>
-                        <li>Problem Solving</li>
-                        <!-- Tambahkan keahlian lain -->
+                        <li>HTML</li> <li>CSS</li> <li>JavaScript</li> <li>PHP</li> <li>GitHub</li> <li>Problem Solving</li>
                     </ul>
                 </div>
             </div>
@@ -474,197 +480,236 @@ Saya adalah individu yang proaktif, detail-oriented, dan selalu ingin belajar ha
 
     <section id="projects">
         <div class="container">
-            <h2>Proyek Terbaru</h2>
+            <h2 class="fade-in">Proyek Terbaru</h2>
             <div class="project-grid">
                 <!-- Proyek 1 -->
-                <div class="project-card">
-                    <!-- Ganti dengan URL gambar proyek Anda -->
-                    <img src="gambar/Screenshot (228).png" alt="Gambar Proyek 1" class="project-image">
+                <div class="project-card fade-in">
+                    <div class="project-image-wrapper">
+                         <!-- Ganti dengan URL gambar proyek Anda. Ini placeholder. -->
+                        <img src="https://via.placeholder.com/400x200/2c3e50/ecf0f1?text=Website+Development" alt="Pengembangan Website Kustom" class="project-image">
+                    </div>
                     <div class="project-info">
                         <h3>Pengembangan website</h3>
-                        <p class="project-description"> mulai dari konsep awal hingga peluncuran dan pemeliharaan. Fokus saya adalah menciptakan website yang tidak hanya menarik secara visual, tetapi juga fungsional, responsif di semua perangkat, dan dioptimalkan untuk pengalaman pengguna terbaik</p>
+                        <p class="project-description">Mulai dari konsep awal hingga peluncuran dan pemeliharaan. Fokus saya adalah menciptakan website yang tidak hanya menarik secara visual, tetapi juga fungsional dan responsif.</p>
                         <div class="project-links">
-                            <a href="" target="_blank" rel="noopener noreferrer">Kode</a>
+                            <!-- [DIUBAH] Link dengan ikon -->
+                            <a href="#" target="_blank" rel="noopener noreferrer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.67.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                                Kode
+                            </a>
                         </div>
-                        <div class="project-tech">
-                            Teknologi: <span>HTML</span> <span>CSS</span> <span>JavaScript</span> <span>PHP</span>
-                        </div>
-                    </div>
-                </div>
-
-                   <div class="project-card">
-                    <!-- Ganti dengan URL gambar proyek Anda -->
-                    <img src="p.png" alt="Gambar Proyek 1" class="project-image">
-                    <div class="project-info">
-                        <h3>Pembuatan Portofolio</h3>
-                        <p class="project-description"> berikut merupakan Portofolio seorang dosen yang saya buat </p>
-                        <div class="project-links">
-                            <a href="https://web-si-te.github.io/profil/" target="_blank" rel="noopener noreferrer">lihat Website</a>
-                        </div>
-                        <div class="project-tech">
-                            Teknologi: <span>HTML</span> <span>CSS</span> <span>JavaScript</span> 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <!-- Ganti dengan URL gambar proyek Anda -->
-                    <img src="Screenshot (237).png" alt="Gambar Proyek 3" class="project-image">
-                    <div class="project-info">
-                        <h3>Pembuatan Website Konveksi</h3>
-                        <p class="project-description"> Saya merancang landing page untuk Konveksi Ilhami, usaha konveksi yang melayani pembuatan pakaian custom seperti seragam, kaos komunitas, dan gamis.
-
-Landing page ini difokuskan untuk memperkenalkan layanan, menampilkan contoh produk, dan mengarahkan pengunjung untuk menghubungi via WhatsApp.
-
-Fitur utama:
-
-Desain modern dan responsif
-
-Informasi layanan singkat & jelas
-
-Galeri produk unggulan
-
-Tombol CTA langsung ke WhatsApp
-
-Tujuan utamanya adalah meningkatkan kepercayaan calon pelanggan dan memudahkan komunikasi pemesanan secara langsung. </p>
-                        <div class="project-links">
-                            <a href="https://web-si-te.github.io/Ilhamiconvection/" target="_blank" rel="noopener noreferrer">lihat website</a>
-                        </div>
-                        <div class="project-tech">
-                            Teknologi: <span>HTML</span> <span>CSS</span> <span>JavaScript</span> 
-                        </div>
+                        <div class="project-tech">Teknologi: <span>HTML</span> <span>CSS</span> <span>JavaScript</span> <span>PHP</span></div>
                     </div>
                 </div>
 
                 <!-- Proyek 2 -->
-
-                <!-- Proyek 3 (Tanpa gambar, contoh)
-                <div class="project-card">
+                <div class="project-card fade-in">
+                    <div class="project-image-wrapper">
+                        <!-- Ganti dengan URL gambar proyek Anda. Ini placeholder. -->
+                        <img src="https://via.placeholder.com/400x200/3498db/ecf0f1?text=Portofolio+Dosen" alt="Website Portofolio Dosen" class="project-image">
+                    </div>
                     <div class="project-info">
-                        <h3>Portofolio Sebelumnya</h3>
-                        <p class="project-description">Versi lama dari portofolio pribadi saya, dibangun dengan fokus pada [Fokus Desain/Teknologi]. Ini menunjukkan evolusi kemampuan saya.</p>
+                        <h3>Pembuatan Portofolio</h3>
+                        <p class="project-description">Berikut merupakan portofolio seorang dosen yang saya buat menggunakan teknologi web dasar.</p>
                         <div class="project-links">
-                            <a href="#" target="_blank" rel="noopener noreferrer">Lihat Versi Lama</a>
+                             <!-- [DIUBAH] Link dengan ikon -->
+                            <a href="https://web-si-te.github.io/profil/" target="_blank" rel="noopener noreferrer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>
+                                Lihat Website
+                            </a>
                         </div>
-                        <div class="project-tech">
-                            Teknologi: <span>HTML</span> <span>CSS</span> <span>jQuery</span>
-                        </div>
+                        <div class="project-tech">Teknologi: <span>HTML</span> <span>CSS</span> <span>JavaScript</span></div>
                     </div>
                 </div>
-                 Tambahkan lebih banyak proyek jika perlu -->
+
+                <!-- Proyek 3 -->
+                <div class="project-card fade-in">
+                    <div class="project-image-wrapper">
+                         <!-- Ganti dengan URL gambar proyek Anda. Ini placeholder. -->
+                        <img src="https://via.placeholder.com/400x200/27ae60/ecf0f1?text=Konveksi+Ilhami" alt="Landing Page Konveksi Ilhami" class="project-image">
+                    </div>
+                    <div class="project-info">
+                        <h3>Website Konveksi Ilhami</h3>
+                        <p class="project-description">Merancang dan membangun landing page modern untuk Konveksi Ilhami, dengan fokus pada galeri produk dan tombol Call-to-Action (CTA) yang mengarah langsung ke WhatsApp untuk pemesanan.</p>
+                        <div class="project-links">
+                            <a href="https://web-si-te.github.io/Ilhamiconvection/" target="_blank" rel="noopener noreferrer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>
+                                Lihat Website
+                            </a>
+                        </div>
+                        <div class="project-tech">Teknologi: <span>HTML</span> <span>CSS</span> <span>JavaScript</span></div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="contact">
-        <div class="container">
-           <h2>Hubungi Saya</h2>
-            <p style="text-align:center; max-width:600px; margin:-30px auto 40px auto;">Saya selalu terbuka untuk diskusi mengenai proyek baru, peluang kolaborasi, atau sekadar bertukar pikiran. Jangan ragu untuk menghubungi saya!</p>
-            <form action="https://formspree.io/f/YOUR_UNIQUE_FORM_ID" method="POST">
-              <!--  <div class="form-group">
-                    <label for="name">Nama Anda:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Anda:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Pesan Anda:</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                <button type="submit">Kirim Pesan</button>
-            </form>
-        -->
-            <div class="social-links">
-                <!-- Ganti # dengan link profil sosial media Anda -->
-                <!-- Untuk ikon, Anda bisa menggunakan SVG inline, karakter unicode, atau Font Awesome (tambahkan library-nya) -->
-                <a href="https://github.com/web-si-te" target="_blank" rel="noopener noreferrer" title="GitHub">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                </a>
-                <a href="www.linkedin.com/in/faiz-azzam-319236319" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.59-11.018-3.714v-2.155z"/></svg>
-                </a>
-                <!-- Tambahkan link sosial media lain jika perlu -->
-            </div>
+    <div class="container">
+       <h2 class="fade-in">Hubungi Saya</h2>
+        <p class="fade-in" style="text-align:center; max-width:600px; margin:-30px auto 40px auto;">
+            Saya selalu terbuka untuk diskusi mengenai proyek baru, peluang kolaborasi, atau sekadar bertukar pikiran. Jangan ragu untuk menghubungi saya langsung melalui email atau media sosial di bawah ini.
+        </p>
+        
+        <!-- [DIUBAH] Tombol Email menggantikan formulir -->
+        <div style="text-align: center; margin-bottom: 40px;" class="fade-in">
+            <!-- PENTING: Ganti 'email.anda@contoh.com' dengan alamat email Anda yang sebenarnya -->
+            <a href="mailto:azzafazzam13@gmail.com" class="cta-button">Kirim Email</a>
         </div>
-    </section>
 
+        <!-- Bagian Social Links tetap ada -->
+      <div class="social-links fade-in">
+    <!-- Ikon GitHub -->
+    <a href="https://github.com/web-si-te" target="_blank" rel="noopener noreferrer" title="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+    </a>
+    
+    <!-- Ikon LinkedIn -->
+    <a href="https://www.linkedin.com/in/faiz-azzam-319236319" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.59-11.018-3.714v-2.155z"/></svg>
+    </a>
+
+    <!-- Ikon Instagram -->
+    <!-- Ganti 'USERNAME_ANDA' dengan username Instagram Anda -->
+    <a href="https://www.instagram.com/faizazzaam" target="_blank" rel="noopener noreferrer" title="Instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44c0-.795-.645-1.44-1.441-1.44z"/></svg>
+    </a>
+
+    <!-- [BARU] Ikon Lynk.id (menggunakan ikon link generik) -->
+    <!-- PENTING: Ganti 'https://lynk.id/USERNAME_ANDA' dengan link profil Anda -->
+    <a href="https://lynk.id/faizazzam" target="_blank" rel="noopener noreferrer" title="lynk.id">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11.213 14.238l-3.326 3.326a5.551 5.551 0 0 1-7.84-7.84l3.326-3.326a.5.5 0 0 1 .707.707L.754 10.43a4.551 4.551 0 0 0 6.435 6.435l3.326-3.326a.5.5 0 0 1 .707.707zm1.574-11.182a5.551 5.551 0 0 1 7.84 7.84l-3.326 3.326a.5.5 0 0 1-.707-.707l3.326-3.326a4.551 4.551 0 0 0-6.435-6.435L9.16 7.153a.5.5 0 1 1-.707-.707l3.326-3.326z"/><path d="M6.637 17.363a.5.5 0 0 1-.707 0l-3.326-3.326a.5.5 0 0 1 .707-.707l3.326 3.326a.5.5 0 0 1 0 .707zm10.726-10.726a.5.5 0 0 1 0 .707l-3.326 3.326a.5.5 0 0 1-.707-.707l3.326-3.326a.5.5 0 0 1 .707 0z"/></svg>
+    </a>
+</div>
+    </div>
+</section>
     <footer>
         <div class="container">
-            <p>© <span id="currentYear"></span>. Semua Hak Dilindungi.</p>
+            <p>© <span id="currentYear"></span> Faiz. Semua Hak Dilindungi.</p>
         </div>
     </footer>
 
-    <!-- Tombol Scroll to Top -->
     <button id="scrollTopBtn" title="Kembali ke atas">↑</button>
 
     <script>
-        // JavaScript Sederhana
+        document.addEventListener('DOMContentLoaded', function() {
 
-        // 1. Navigasi Aktif saat Scroll (Scrollspy sederhana)
-        const sections = document.querySelectorAll('section');
-        const navLi = document.querySelectorAll('header nav ul li a');
-
-        window.addEventListener('scroll', ()=> {
-            let current = '';
-            sections.forEach( section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                // Kurangi sedikit (misal 50px) agar lebih akurat saat header sticky
-                if (pageYOffset >= (sectionTop - sectionHeight / 3 - 50) ) {
-                    current = section.getAttribute('id');
-                }
-            })
-
-            navLi.forEach( a => {
-                a.classList.remove('active');
-                if (a.getAttribute('href').substring(1) === current) {
-                    a.classList.add('active');
-                }
+            // --- [BARU] 1. EFEK MENGETIK (TYPED.JS) ---
+            new Typed('.typed-text', {
+                strings: ["Mahasiswa", "Web Developer"],
+                typeSpeed: 70,
+                backSpeed: 40,
+                loop: true,
+                smartBackspace: true
             });
-            // Jika di paling atas, Beranda yang aktif
-            if (pageYOffset < sections[0].offsetTop - 50) {
-                 navLi.forEach( a => a.classList.remove('active'));
+
+            // --- [BARU] 2. ANIMASI SAAT SCROLL (INTERSECTION OBSERVER) ---
+            const faders = document.querySelectorAll('.fade-in');
+            const appearOptions = {
+                threshold: 0.1, // Muncul saat 10% elemen terlihat
+                rootMargin: "0px 0px -50px 0px" // Sedikit offset
+            };
+            const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Hentikan observasi setelah animasi
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+
+            // --- [DIUBAH] 3. NAVIGASI AKTIF (SCROLLSPY DENGAN INTERSECTION OBSERVER) ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('header nav ul li a');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-50% 0px -50% 0px', // Target di tengah viewport
+                threshold: 0
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+            // Atur Beranda aktif saat di paling atas
+            if (window.scrollY < 200) {
                  document.querySelector('header nav ul li a[href="#hero"]').classList.add('active');
             }
-        });
 
-        // 2. Tampilkan Tahun Sekarang di Footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // 3. Tombol Scroll to Top
-        const scrollTopBtn = document.getElementById("scrollTopBtn");
+            // --- 4. TAHUN SEKARANG DI FOOTER ---
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        window.onscroll = function() {
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                scrollTopBtn.style.display = "block";
-            } else {
-                scrollTopBtn.style.display = "none";
-            }
-        };
+            // --- 5. TOMBOL SCROLL TO TOP ---
+            const scrollTopBtn = document.getElementById("scrollTopBtn");
+            window.onscroll = function() {
+                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                    scrollTopBtn.style.display = "block";
+                } else {
+                    scrollTopBtn.style.display = "none";
+                }
+            };
+            scrollTopBtn.addEventListener("click", () => window.scrollTo({top: 0, behavior: 'smooth'}));
 
-        scrollTopBtn.addEventListener("click", function() {
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        });
 
-        // 4. (Opsional) Animasi sederhana saat elemen masuk viewport (jika diinginkan)
-        // Ini lebih kompleks untuk satu file dan bisa membuat file berat.
-        // Untuk sekarang, kita fokus pada CSS transitions untuk hover.
+            // --- [BARU] 6. FORMULIR KONTAK DENGAN AJAX (FETCH API) ---
+            // --- [BARU] 6. FORMULIR KONTAK DENGAN AJAX (FETCH API) ---
+const form = document.getElementById("contact-form");
+const statusDiv = document.getElementById("form-status");
 
-        // 5. Submit form (jika menggunakan Formspree atau Netlify Forms, mereka handle ini)
-        // Jika Anda ingin menangani form submit dengan JS (misal, via AJAX), tambahkan kodenya di sini.
-        // Contoh sederhana untuk Formspree agar menampilkan pesan setelah submit:
-        const contactForm = document.querySelector('#contact form');
-        if (contactForm && contactForm.getAttribute('action').includes('formspree')) {
-            contactForm.addEventListener('submit', async (e) => {
-                // e.preventDefault(); // Hapus ini jika ingin Formspree menangani redirect
-                // Logika tambahan bisa di sini, misal:
-                // Tampilkan pesan "Mengirim..."
-                // Setelah submit (jika tidak ada redirect), tampilkan pesan sukses/error
-            });
+async function handleSubmit(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    
+    statusDiv.innerHTML = "Mengirim...";
+    statusDiv.className = 'info'; // Anda bisa menambahkan class info di CSS jika mau
+    statusDiv.style.display = 'block';
+
+    fetch(event.target.action, {
+        method: form.method,
+        body: data,
+        headers: { 'Accept': 'application/json' }
+    }).then(response => {
+        if (response.ok) {
+            statusDiv.innerHTML = "Terima kasih! Pesan Anda telah terkirim.";
+            statusDiv.className = 'success';
+            form.reset();
+        } else {
+            response.json().then(data => {
+                if (Object.hasOwn(data, 'errors')) {
+                    statusDiv.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                } else {
+                    statusDiv.innerHTML = "Oops! Terjadi kesalahan saat mengirim pesan.";
+                }
+                statusDiv.className = 'error';
+            })
         }
-
+    }).catch(error => {
+        statusDiv.innerHTML = "Oops! Terjadi kesalahan jaringan.";
+        statusDiv.className = 'error';
+    });
+}
+form.addEventListener("submit", handleSubmit);
+        });
     </script>
 </body>
 </html>
