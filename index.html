@@ -4,10 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- [BARU] Meta description untuk SEO -->
-    <meta name="description" content="Portofolio Faiz, seorang web developer yang bersemangat dalam menciptakan solusi web modern dan responsif. Lihat proyek dan keahlian saya.">
+    <meta name="description" content="Portofolio Faiz, seorang web developer yang bersemangat dalam menciptakan solusi web modern dan responsif. Lihat proyek, keahlian, dan sertifikasi saya.">
     <title>Faiz | Web Developer</title>
+    
+    <!-- Google Fonts (Poppins) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- [BARU] CDN untuk Typed.js (Efek Mengetik) -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
     <style>
-        /* [BARU] CSS Variables untuk tema warna yang mudah diubah */
+        /* === DASAR & VARIABEL === */
         :root {
             --primary-color: #2c3e50; /* Biru Tua Gelap */
             --secondary-color: #34495e; /* Versi lebih terang dari primary */
@@ -17,27 +26,43 @@
             --text-dark: #333; /* Teks Gelap */
             --text-muted: #555; /* Teks Redup */
             --bg-light: #f4f7f6; /* Latar Belakang Terang */
-            --bg-dark: #1f2b38; /* Latar Belakang Footer */
+            --bg-dark: #1f2b38; /* Latar Belakang Footer & Dark Mode */
             --border-color: #e0e0e0;
         }
 
-        /* Reset CSS Sederhana */
+        /* [BARU] Dark Mode Theme */
+        body[data-theme="dark"] {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #ecf0f1;
+            --accent-color-hover: #bdc3c7;
+            --text-light: #1f2b38;
+            --text-dark: #ecf0f1;
+            --text-muted: #bdc3c7;
+            --bg-light: #1f2b38;
+            --bg-dark: #2c3e50;
+            --border-color: #34495e;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             scroll-behavior: smooth;
         }
-
         body {
             font-family: 'Poppins', sans-serif;
             line-height: 1.7;
             background-color: var(--bg-light);
             color: var(--text-dark);
             overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
         }
-
-        /* [BARU] Kelas untuk animasi fade-in saat scroll */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
@@ -48,14 +73,7 @@
             transform: translateY(0);
         }
 
-        /* Container Utama */
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header & Navigasi */
+        /* === HEADER & NAVIGASI === */
         header {
             background-color: var(--primary-color);
             color: var(--text-light);
@@ -70,6 +88,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
         header .logo {
             font-size: 1.8em;
@@ -95,7 +114,64 @@
             color: var(--accent-color);
         }
 
-        /* Hero Section */
+        /* [BARU] Header Controls, Dark Mode Switch, Hamburger */
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+        }
+        .theme-switch {
+            display: inline-block;
+            height: 24px;
+            position: relative;
+            width: 44px;
+        }
+        .theme-switch input { display: none; }
+        .slider {
+            background-color: var(--secondary-color);
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+        }
+        .slider:before {
+            background-color: #fff;
+            bottom: 3px;
+            content: "";
+            height: 18px;
+            left: 3px;
+            position: absolute;
+            transition: .4s;
+            width: 18px;
+        }
+        input:checked + .slider { background-color: var(--accent-color); }
+        body[data-theme="dark"] input:checked + .slider { background-color: #555; }
+        input:checked + .slider:before { transform: translateX(20px); }
+        .slider.round { border-radius: 34px; }
+        .slider.round:before { border-radius: 50%; }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px 0;
+            background-color: var(--text-light);
+            transition: all 0.3s ease-in-out;
+        }
+
+
+        /* === BAGIAN HERO === */
         #hero {
             background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.85)), url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
@@ -115,10 +191,10 @@
             font-weight: 700;
             line-height: 1.2;
         }
-        /* [BARU] Style untuk efek mengetik */
         #hero h1 .typed-text {
             color: var(--accent-color);
         }
+        body[data-theme="dark"] #hero h1 .typed-text { color: #fff; font-weight: bold; text-shadow: 0 0 5px rgba(255,255,255,0.3);}
         #hero p {
             font-size: 1.2em;
             margin-bottom: 30px;
@@ -138,11 +214,15 @@
             background-color: var(--accent-color-hover);
             transform: translateY(-2px);
         }
-
-        /* Sections (About, Projects, Contact) */
+        body[data-theme="dark"] .cta-button {
+            color: var(--text-light);
+        }
+        
+        /* === STYLING SECTION UMUM === */
         section {
             padding: 80px 0;
             border-bottom: 1px solid var(--border-color);
+            transition: border-color 0.3s;
         }
         section:last-of-type {
             border-bottom: none;
@@ -167,15 +247,13 @@
             border-radius: 2px;
         }
 
-        /* About Section */
+        /* === BAGIAN TENTANG SAYA === */
         #about .about-content {
             display: flex;
             gap: 40px;
             align-items: flex-start;
         }
-        #about .about-text {
-            flex: 2;
-        }
+        #about .about-text { flex: 2; }
         #about .profile-pic-container {
             flex: 1;
             text-align: center;
@@ -201,9 +279,13 @@
             padding: 5px 12px;
             border-radius: 20px;
             font-size: 0.9em;
+            transition: background-color 0.3s;
         }
-
-        /* Projects Section */
+        body[data-theme="dark"] #about .skills-list li {
+            background-color: var(--secondary-color);
+        }
+        
+        /* === BAGIAN PROYEK === */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -214,7 +296,7 @@
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
             display: flex;
             flex-direction: column;
         }
@@ -222,7 +304,6 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
-        /* [BARU] Wrapper untuk gambar agar efek zoom bekerja dengan baik */
         .project-image-wrapper {
             width: 100%;
             height: 200px;
@@ -232,10 +313,10 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease; /* [BARU] Transisi untuk zoom */
+            transition: transform 0.4s ease;
         }
         .project-card:hover img.project-image {
-            transform: scale(1.05); /* [BARU] Efek zoom saat hover */
+            transform: scale(1.05);
         }
         .project-card .project-info {
             padding: 20px;
@@ -255,9 +336,9 @@
             flex-grow: 1;
         }
         .project-card .project-links a {
-            display: inline-flex; /* [BARU] Ubah ke inline-flex untuk align ikon */
+            display: inline-flex;
             align-items: center;
-            gap: 6px; /* [BARU] Jarak antara ikon dan teks */
+            gap: 6px;
             margin-right: 15px;
             text-decoration: none;
             color: var(--accent-color);
@@ -279,78 +360,80 @@
             margin-right: 5px;
             display: inline-block;
             margin-bottom: 5px;
+            transition: background-color 0.3s;
         }
-
-        /* Contact Section */
-        #contact form {
-            max-width: 600px;
-            margin: 0 auto;
+        body[data-theme="dark"] .project-card {
+             background-color: var(--secondary-color);
+             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        body[data-theme="dark"] .project-card .project-tech span {
+             background-color: var(--bg-dark);
+        }
+        
+        /* === [BARU] BAGIAN SERTIFIKASI === */
+        #certificates {
+            background-color: #fff;
+        }
+        body[data-theme="dark"] #certificates {
+            background-color: var(--bg-light);
+        }
+        .certificate-grid {
             display: grid;
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
-        #contact .form-group {
+        .certificate-card {
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+        }
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        .certificate-image {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            flex-shrink: 0;
+        }
+        .certificate-info {
             display: flex;
             flex-direction: column;
         }
-        #contact label {
+        .certificate-title {
+            font-size: 1.2em;
+            color: var(--primary-color);
             margin-bottom: 5px;
-            font-weight: 500;
+        }
+        .certificate-issuer, .certificate-date {
+            font-size: 0.9em;
             color: var(--text-muted);
+            margin-bottom: 2px;
+            line-height: 1.4;
         }
-        #contact input,
-        #contact textarea {
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1em;
-            transition: border-color 0.3s ease;
-        }
-        #contact input:focus,
-        #contact textarea:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
-        #contact textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-        #contact button[type="submit"] {
-            background-color: var(--accent-color);
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.1em;
+        .certificate-link {
+            margin-top: 10px;
+            color: var(--accent-color);
+            text-decoration: none;
             font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            justify-self: start;
+            transition: color 0.3s ease;
         }
-        #contact button[type="submit"]:hover {
-            background-color: var(--accent-color-hover);
-            transform: translateY(-2px);
+        .certificate-link:hover {
+            color: var(--accent-color-hover);
         }
-        /* [BARU] Styling untuk pesan status form */
-        #form-status {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            font-weight: 500;
-            display: none; /* Sembunyikan default */
-        }
-        #form-status.success {
-            background-color: #d4edda;
-            color: #155724;
-            display: block;
-        }
-        #form-status.error {
-            background-color: #f8d7da;
-            color: #721c24;
-            display: block;
+        body[data-theme="dark"] .certificate-card {
+            background-color: var(--secondary-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
+        /* === BAGIAN KONTAK & FOOTER === */
         .social-links {
             text-align: center;
             margin-top: 40px;
@@ -367,16 +450,13 @@
             color: var(--accent-color);
             transform: translateY(-3px);
         }
-
-        /* Footer */
         footer {
             text-align: center;
             padding: 30px 0;
             background-color: var(--bg-dark);
             color: #bdc3c7;
+            transition: background-color 0.3s;
         }
-
-        /* Tombol Scroll to Top */
         #scrollTopBtn {
             display: none;
             position: fixed;
@@ -403,24 +483,62 @@
             opacity: 1;
             transform: translateY(-3px);
         }
+        body[data-theme="dark"] #scrollTopBtn {
+            color: var(--text-light);
+        }
 
-        /* Responsiveness */
+        /* === RESPONSIVENESS === */
         @media (max-width: 768px) {
             header .container {
-                flex-direction: column;
-                align-items: center;
+                flex-direction: row;
+                justify-content: space-between;
             }
             header .logo {
-                margin-bottom: 10px;
+                margin-bottom: 0;
+            }
+            header nav {
+                position: absolute;
+                top: 100%;
+                left: 0; /* Ubah ke left */
+                width: 100%;
+            }
+            .nav-links {
+                position: absolute;
+                right: -100%; /* Sembunyikan di luar layar */
+                top: 0; /* Mulai dari atas header */
+                background-color: var(--primary-color);
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                transition: right 0.4s ease-in-out;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            .nav-links.active {
+                right: 0; /* Tampilkan menu */
             }
             header nav ul {
-                padding-left: 0;
-                justify-content: center;
-                flex-wrap: wrap;
+                flex-direction: column;
+                width: 100%;
             }
             header nav ul li {
-                margin: 5px 10px;
+                margin: 15px 0;
+                text-align: center;
             }
+            .hamburger {
+                display: block; /* Tampilkan hamburger di mobile */
+            }
+            /* Animasi hamburger jadi 'X' */
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
             #hero h1 {
                 font-size: 2.2em;
             }
@@ -440,149 +558,190 @@
             .project-grid {
                 grid-template-columns: 1fr;
             }
+            .certificate-grid {
+                grid-template-columns: 1fr;
+            }
+            .certificate-card {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
-    <!-- Google Fonts (Poppins) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- [BARU] CDN untuk Typed.js (Efek Mengetik) -->
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
 </head>
 <body>
-    <section id="hero">
-        <div class="container">
-            <!-- [DIUBAH] Tambahkan span untuk target efek mengetik -->
-            <h1>Halo, Saya Faiz <br> Seorang <span class="typed-text"></span></h1>
-            <p class="fade-in">Seorang Mahasiswa yang bersemangat mencari hal-hal baru dan menciptakan solusi web yang modern dan responsif. Saya suka mengubah ide menjadi kenyataan digital.</p>
-            <a href="#projects" class="cta-button fade-in">Lihat Proyek Saya</a>
-        </div>
-    </section>
 
-    <section id="about">
+    <!-- [DIUBAH] Header dengan Menu Mobile & Dark Mode Toggle -->
+    <header>
         <div class="container">
-            <h2 class="fade-in">Tentang Saya</h2>
-            <div class="about-content">
-                <div class="profile-pic-container fade-in">
-                    <!-- Ganti dengan URL gambar profil Anda. Ini placeholder. -->
-                    <img src="gambar/photo_2025-06-20_11-23-29.jpg" alt="Foto Profil Faiz" class="profile-pic">
+            <a href="#hero" class="logo">Faiz.</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#hero" class="active">Beranda</a></li>
+                    <li><a href="#about">Tentang</a></li>
+                    <li><a href="#projects">Proyek</a></li>
+                    <li><a href="#certificates">Sertifikat</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round"></div>
+                    </label>
                 </div>
-                <div class="about-text fade-in">
-                    <p>Saya Faiz, seorang Frontend Developer pemula yang bersemangat untuk membangun karir di bidang teknologi. Saya memiliki keahlian dasar dalam HTML, CSS, dan JavaScript, dengan fokus pada pembuatan website yang responsif dan user-friendly. Saya adalah individu yang proaktif, detail-oriented, dan selalu ingin belajar hal baru. Di waktu luang, saya menikmati bermain badminton dan membaca buku. Saya mencari peran entry-level di mana saya bisa mengembangkan kemampuan saya lebih lanjut dan memberikan kontribusi positif.</p>
-                    <h3>Keahlian Utama:</h3>
-                    <ul class="skills-list">
-                        <li>HTML</li> <li>CSS</li> <li>JavaScript</li> <li>PHP</li> <li>GitHub</li> <li>Problem Solving</li>
-                    </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
         </div>
-    </section>
+    </header>
 
-    <section id="projects">
-        <div class="container">
-            <h2 class="fade-in">Proyek Terbaru</h2>
-            <div class="project-grid">
-                <!-- Proyek 1 -->
-                <div class="project-card fade-in">
-                    <div class="project-image-wrapper">
-                         <!-- Ganti dengan URL gambar proyek Anda. Ini placeholder. -->
-                        <img src="gambar/Screenshot (228).png" alt="Pengembangan Website Kustom" class="project-image">
-                    </div>
-                    <div class="project-info">
-                        <h3>Pengembangan website</h3>
-                        <p class="project-description">Mulai dari konsep awal hingga peluncuran dan pemeliharaan. Fokus saya adalah menciptakan website yang tidak hanya menarik secara visual, tetapi juga fungsional dan responsif.</p>
-                        <div class="project-links">
-                            <!-- [DIUBAH] Link dengan ikon -->
-                            <a href="#" target="_blank" rel="noopener noreferrer">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.67.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-                                Kode
-                            </a>
-                        </div>
-                        <div class="project-tech">Teknologi: <span>HTML</span> <span>CSS</span> <span>JavaScript</span> <span>PHP</span></div>
-                    </div>
-                </div>
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Halo, Saya Faiz <br> Seorang <span class="typed-text"></span></h1>
+                <p class="fade-in">Seorang Mahasiswa yang bersemangat mencari hal-hal baru dan menciptakan solusi web yang modern dan responsif. Saya suka mengubah ide menjadi kenyataan digital.</p>
+                <a href="#projects" class="cta-button fade-in">Lihat Proyek Saya</a>
+            </div>
+        </section>
 
-                <!-- Proyek 2 -->
-                <div class="project-card fade-in">
-                    <div class="project-image-wrapper">
-                        <!-- Ganti dengan URL gambar proyek Anda. Ini placeholder. -->
-                        <img src="p.png" alt="Website Portofolio Dosen" class="project-image">
+        <section id="about">
+            <div class="container">
+                <h2 class="fade-in">Tentang Saya</h2>
+                <div class="about-content">
+                    <div class="profile-pic-container fade-in">
+                        <!-- PENTING: Ganti 'src' dengan path gambar profil Anda -->
+                        <img src="gambar/photo_2025-06-20_11-23-29.jpg" alt="Foto Profil Faiz" class="profile-pic">
                     </div>
-                    <div class="project-info">
-                        <h3>Pembuatan Portofolio</h3>
-                        <p class="project-description">Berikut merupakan portofolio seorang dosen yang saya buat menggunakan teknologi web dasar.</p>
-                        <div class="project-links">
-                             <!-- [DIUBAH] Link dengan ikon -->
-                            <a href="https://web-si-te.github.io/profil/" target="_blank" rel="noopener noreferrer">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>
-                                Lihat Website
-                            </a>
-                        </div>
-                        <div class="project-tech">Teknologi: <span>HTML</span> <span>CSS</span> <span>JavaScript</span></div>
-                    </div>
-                </div>
-
-                <!-- Proyek 3 -->
-                <div class="project-card fade-in">
-                    <div class="project-image-wrapper">
-                         <!-- Ganti dengan URL gambar proyek Anda. Ini placeholder. -->
-                        <img src="Screenshot (237).png" alt="Landing Page Konveksi Ilhami" class="project-image">
-                    </div>
-                    <div class="project-info">
-                        <h3>Website Konveksi Ilhami</h3>
-                        <p class="project-description">Merancang dan membangun landing page modern untuk Konveksi Ilhami, dengan fokus pada galeri produk dan tombol Call-to-Action (CTA) yang mengarah langsung ke WhatsApp untuk pemesanan.</p>
-                        <div class="project-links">
-                            <a href="https://web-si-te.github.io/Ilhamiconvection/" target="_blank" rel="noopener noreferrer">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>
-                                Lihat Website
-                            </a>
-                        </div>
-                        <div class="project-tech">Teknologi: <span>HTML</span> <span>CSS</span> <span>JavaScript</span></div>
+                    <div class="about-text fade-in">
+                        <p>Saya Faiz, seorang Frontend Developer pemula yang bersemangat untuk membangun karir di bidang teknologi. Saya memiliki keahlian dasar dalam HTML, CSS, dan JavaScript, dengan fokus pada pembuatan website yang responsif dan user-friendly. Saya adalah individu yang proaktif, detail-oriented, dan selalu ingin belajar hal baru. Di waktu luang, saya menikmati bermain badminton dan membaca buku. Saya mencari peran entry-level di mana saya bisa mengembangkan kemampuan saya lebih lanjut dan memberikan kontribusi positif.</p>
+                        <h3>Keahlian Utama:</h3>
+                        <ul class="skills-list">
+                            <li>HTML</li> <li>CSS</li> <li>JavaScript</li> <li>PHP</li> <li>GitHub</li> <li>Problem Solving</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contact">
-    <div class="container">
-       <h2 class="fade-in">Hubungi Saya</h2>
-        <p class="fade-in" style="text-align:center; max-width:600px; margin:-30px auto 40px auto;">
-            Saya selalu terbuka untuk diskusi mengenai proyek baru, peluang kolaborasi, atau sekadar bertukar pikiran. Jangan ragu untuk menghubungi saya langsung melalui email atau media sosial di bawah ini.
-        </p>
-        
-        <!-- [DIUBAH] Tombol Email menggantikan formulir -->
-        <div style="text-align: center; margin-bottom: 40px;" class="fade-in">
-            <!-- PENTING: Ganti 'email.anda@contoh.com' dengan alamat email Anda yang sebenarnya -->
-            <a href="mailto:azzafazzam13@gmail.com" class="cta-button">Kirim Email</a>
-        </div>
+        <section id="projects">
+            <div class="container">
+                <h2 class="fade-in">Proyek Terbaru</h2>
+                <div class="project-grid">
+                    <!-- Proyek 1 -->
+                    <div class="project-card fade-in">
+                        <div class="project-image-wrapper">
+                            <!-- PENTING: Ganti 'src' dengan gambar proyek Anda -->
+                            <img src="gambar/Screenshot (228).png" alt="Pengembangan Website Kustom" class="project-image">
+                        </div>
+                        <div class="project-info">
+                            <h3>Pengembangan website</h3>
+                            <p class="project-description">Mulai dari konsep awal hingga peluncuran dan pemeliharaan. Fokus saya adalah menciptakan website yang tidak hanya menarik secara visual, tetapi juga fungsional dan responsif.</p>
+                            <div class="project-links">
+                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.67.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                                    Kode
+                                </a>
+                            </div>
+                            <div class="project-tech">Teknologi: <span>HTML</span> <span>CSS</span> <span>JavaScript</span> <span>PHP</span></div>
+                        </div>
+                    </div>
 
-        <!-- Bagian Social Links tetap ada -->
-      <div class="social-links fade-in">
-    <!-- Ikon GitHub -->
-    <a href="https://github.com/web-si-te" target="_blank" rel="noopener noreferrer" title="GitHub">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-    </a>
-    
-    <!-- Ikon LinkedIn -->
-    <a href="https://www.linkedin.com/in/faiz-azzam-319236319" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.59-11.018-3.714v-2.155z"/></svg>
-    </a>
+                    <!-- Proyek 2 -->
+                    <div class="project-card fade-in">
+                        <div class="project-image-wrapper">
+                            <!-- PENTING: Ganti 'src' dengan gambar proyek Anda -->
+                            <img src="p.png" alt="Website Portofolio Dosen" class="project-image">
+                        </div>
+                        <div class="project-info">
+                            <h3>Pembuatan Portofolio</h3>
+                            <p class="project-description">Berikut merupakan portofolio seorang dosen yang saya buat menggunakan teknologi web dasar.</p>
+                            <div class="project-links">
+                                <a href="https://web-si-te.github.io/profil/" target="_blank" rel="noopener noreferrer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>
+                                    Lihat Website
+                                </a>
+                            </div>
+                            <div class="project-tech">Teknologi: <span>HTML</span> <span>CSS</span> <span>JavaScript</span></div>
+                        </div>
+                    </div>
 
-    <!-- Ikon Instagram -->
-    <!-- Ganti 'USERNAME_ANDA' dengan username Instagram Anda -->
-    <a href="https://www.instagram.com/faizazzaam" target="_blank" rel="noopener noreferrer" title="Instagram">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44c0-.795-.645-1.44-1.441-1.44z"/></svg>
-    </a>
+                    <!-- Proyek 3 -->
+                    <div class="project-card fade-in">
+                        <div class="project-image-wrapper">
+                            <!-- PENTING: Ganti 'src' dengan gambar proyek Anda -->
+                            <img src="Screenshot (237).png" alt="Landing Page Konveksi Ilhami" class="project-image">
+                        </div>
+                        <div class="project-info">
+                            <h3>Website Konveksi Ilhami</h3>
+                            <p class="project-description">Merancang dan membangun landing page modern untuk Konveksi Ilhami, dengan fokus pada galeri produk dan tombol Call-to-Action (CTA) yang mengarah langsung ke WhatsApp untuk pemesanan.</p>
+                            <div class="project-links">
+                                <a href="https://web-si-te.github.io/Ilhamiconvection/" target="_blank" rel="noopener noreferrer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>
+                                    Lihat Website
+                                </a>
+                            </div>
+                            <div class="project-tech">Teknologi: <span>HTML</span> <span>CSS</span> <span>JavaScript</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- [BARU] Ikon Lynk.id (menggunakan ikon link generik) -->
-    <!-- PENTING: Ganti 'https://lynk.id/USERNAME_ANDA' dengan link profil Anda -->
-    <a href="https://lynk.id/faizazzam" target="_blank" rel="noopener noreferrer" title="lynk.id">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11.213 14.238l-3.326 3.326a5.551 5.551 0 0 1-7.84-7.84l3.326-3.326a.5.5 0 0 1 .707.707L.754 10.43a4.551 4.551 0 0 0 6.435 6.435l3.326-3.326a.5.5 0 0 1 .707.707zm1.574-11.182a5.551 5.551 0 0 1 7.84 7.84l-3.326 3.326a.5.5 0 0 1-.707-.707l3.326-3.326a4.551 4.551 0 0 0-6.435-6.435L9.16 7.153a.5.5 0 1 1-.707-.707l3.326-3.326z"/><path d="M6.637 17.363a.5.5 0 0 1-.707 0l-3.326-3.326a.5.5 0 0 1 .707-.707l3.326 3.326a.5.5 0 0 1 0 .707zm10.726-10.726a.5.5 0 0 1 0 .707l-3.326 3.326a.5.5 0 0 1-.707-.707l3.326-3.326a.5.5 0 0 1 .707 0z"/></svg>
+        <!-- [BARU] BAGIAN SERTIFIKASI -->
+        <section id="certificates">
+            <div class="container">
+                <h2 class="fade-in">Sertifikasi & Pencapaian</h2>
+                <div class="certificate-grid">
+                    <!-- Sertifikat 1 -->
+                    <div class="certificate-card fade-in">
+                        <!-- PENTING: Ganti 'src' dengan gambar sertifikat & 'href' dengan link validasi -->
+                        <img src="sertif1.jpg" alt="Sertifikat Dasar Pemrograman Web" class="certificate-image">
+                        <div class="certificate-info">
+                            <h3 class="certificate-title">Frontend In Website Development </h3>
+                            <p class="certificate-issuer">Diterbitkan oleh: <strong>MySkill Short Class</strong></p>
+                            <p class="certificate-date">Diterbitkan: Desember 2024</p>
+                            <a href="https://drive.google.com/drive/folders/1zx-WRA8bnx6MYK3Gdz527Ol98BlJSEb9?usp=drive_link" target="_blank" rel="noopener noreferrer" class="certificate-link">Lihat Kredensial →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2 class="fade-in">Hubungi Saya</h2>
+                <p class="fade-in" style="text-align:center; max-width:600px; margin:-30px auto 40px auto;">
+                    Saya selalu terbuka untuk diskusi mengenai proyek baru, peluang kolaborasi, atau sekadar bertukar pikiran. Jangan ragu untuk menghubungi saya langsung melalui email atau media sosial di bawah ini.
+                </p>
+                
+                <div style="text-align: center; margin-bottom: 40px;" class="fade-in">
+                    <!-- PENTING: Ganti 'email.anda@contoh.com' dengan alamat email Anda -->
+                    <a href="mailto:azzafazzam13@gmail.com" class="cta-button">Kirim Email</a>
+                </div>
+
+                <div class="social-links fade-in">
+                    <!-- PENTING: Ganti '#' dengan URL profil media sosial Anda -->
+                    <a href="https://github.com/web-si-te" target="_blank" rel="noopener noreferrer" title="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/faiz-azzam-319236319" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.59-11.018-3.714v-2.155z"/></svg>
     </a>
-</div>
-    </div>
-</section>
+                    <a href="https://www.instagram.com/faizazzaam" target="_blank" rel="noopener noreferrer" title="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44c0-.795-.645-1.44-1.441-1.44z"/></svg>
+                    </a>
+                    <a href="https://lynk.id/faizazzam" target="_blank" rel="noopener noreferrer" title="lynk.id">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11.213 14.238l-3.326 3.326a5.551 5.551 0 0 1-7.84-7.84l3.326-3.326a.5.5 0 0 1 .707.707L.754 10.43a4.551 4.551 0 0 0 6.435 6.435l3.326-3.326a.5.5 0 0 1 .707.707zm1.574-11.182a5.551 5.551 0 0 1 7.84 7.84l-3.326 3.326a.5.5 0 0 1-.707-.707l3.326-3.326a4.551 4.551 0 0 0-6.435-6.435L9.16 7.153a.5.5 0 1 1-.707-.707l3.326-3.326z"/><path d="M6.637 17.363a.5.5 0 0 1-.707 0l-3.326-3.326a.5.5 0 0 1 .707-.707l3.326 3.326a.5.5 0 0 1 0 .707zm10.726-10.726a.5.5 0 0 1 0 .707l-3.326 3.326a.5.5 0 0 1-.707-.707l3.326-3.326a.5.5 0 0 1 .707 0z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <footer>
         <div class="container">
             <p>© <span id="currentYear"></span> Faiz. Semua Hak Dilindungi.</p>
@@ -594,50 +753,67 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
-            // --- [BARU] 1. EFEK MENGETIK (TYPED.JS) ---
+            // --- 1. LOGIKA HAMBURGER MENU ---
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+            document.querySelectorAll('.nav-links li a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // --- 2. LOGIKA DARK MODE ---
+            const themeToggle = document.getElementById('checkbox');
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme) {
+                document.body.setAttribute('data-theme', currentTheme);
+                if (currentTheme === 'dark') {
+                    themeToggle.checked = true;
+                }
+            }
+            themeToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    document.body.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.body.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+
+            // --- 3. EFEK MENGETIK (TYPED.JS) ---
             new Typed('.typed-text', {
-                strings: ["Mahasiswa", "Web Developer"],
+                strings: ["Mahasiswa", "Web Developer", "Problem Solver"],
                 typeSpeed: 70,
                 backSpeed: 40,
                 loop: true,
                 smartBackspace: true
             });
 
-            // --- [BARU] 2. ANIMASI SAAT SCROLL (INTERSECTION OBSERVER) ---
+            // --- 4. ANIMASI SAAT SCROLL (INTERSECTION OBSERVER) ---
             const faders = document.querySelectorAll('.fade-in');
-            const appearOptions = {
-                threshold: 0.1, // Muncul saat 10% elemen terlihat
-                rootMargin: "0px 0px -50px 0px" // Sedikit offset
-            };
             const appearOnScroll = new IntersectionObserver(function(entries, observer) {
                 entries.forEach(entry => {
-                    if (!entry.isIntersecting) {
-                        return;
-                    }
+                    if (!entry.isIntersecting) return;
                     entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // Hentikan observasi setelah animasi
+                    observer.unobserve(entry.target);
                 });
-            }, appearOptions);
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            faders.forEach(fader => appearOnScroll.observe(fader));
 
-            faders.forEach(fader => {
-                appearOnScroll.observe(fader);
-            });
-
-            // --- [DIUBAH] 3. NAVIGASI AKTIF (SCROLLSPY DENGAN INTERSECTION OBSERVER) ---
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('header nav ul li a');
-
-            const observerOptions = {
-                root: null,
-                rootMargin: '-50% 0px -50% 0px', // Target di tengah viewport
-                threshold: 0
-            };
-
+            // --- 5. NAVIGASI AKTIF (SCROLLSPY) ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinksObserver = document.querySelectorAll('header nav ul li a');
             const sectionObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const id = entry.target.getAttribute('id');
-                        navLinks.forEach(link => {
+                        navLinksObserver.forEach(link => {
                             link.classList.remove('active');
                             if (link.getAttribute('href') === `#${id}`) {
                                 link.classList.add('active');
@@ -645,21 +821,13 @@
                         });
                     }
                 });
-            }, observerOptions);
-
-            sections.forEach(section => {
-                sectionObserver.observe(section);
-            });
-            // Atur Beranda aktif saat di paling atas
-            if (window.scrollY < 200) {
-                 document.querySelector('header nav ul li a[href="#hero"]').classList.add('active');
-            }
-
-
-            // --- 4. TAHUN SEKARANG DI FOOTER ---
+            }, { rootMargin: '-40% 0px -60% 0px' });
+            sections.forEach(section => sectionObserver.observe(section));
+            
+            // --- 6. TAHUN SEKARANG DI FOOTER ---
             document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-            // --- 5. TOMBOL SCROLL TO TOP ---
+            // --- 7. TOMBOL SCROLL TO TOP ---
             const scrollTopBtn = document.getElementById("scrollTopBtn");
             window.onscroll = function() {
                 if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
@@ -669,46 +837,6 @@
                 }
             };
             scrollTopBtn.addEventListener("click", () => window.scrollTo({top: 0, behavior: 'smooth'}));
-
-
-            // --- [BARU] 6. FORMULIR KONTAK DENGAN AJAX (FETCH API) ---
-            // --- [BARU] 6. FORMULIR KONTAK DENGAN AJAX (FETCH API) ---
-const form = document.getElementById("contact-form");
-const statusDiv = document.getElementById("form-status");
-
-async function handleSubmit(event) {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    
-    statusDiv.innerHTML = "Mengirim...";
-    statusDiv.className = 'info'; // Anda bisa menambahkan class info di CSS jika mau
-    statusDiv.style.display = 'block';
-
-    fetch(event.target.action, {
-        method: form.method,
-        body: data,
-        headers: { 'Accept': 'application/json' }
-    }).then(response => {
-        if (response.ok) {
-            statusDiv.innerHTML = "Terima kasih! Pesan Anda telah terkirim.";
-            statusDiv.className = 'success';
-            form.reset();
-        } else {
-            response.json().then(data => {
-                if (Object.hasOwn(data, 'errors')) {
-                    statusDiv.innerHTML = data["errors"].map(error => error["message"]).join(", ");
-                } else {
-                    statusDiv.innerHTML = "Oops! Terjadi kesalahan saat mengirim pesan.";
-                }
-                statusDiv.className = 'error';
-            })
-        }
-    }).catch(error => {
-        statusDiv.innerHTML = "Oops! Terjadi kesalahan jaringan.";
-        statusDiv.className = 'error';
-    });
-}
-form.addEventListener("submit", handleSubmit);
         });
     </script>
 </body>
